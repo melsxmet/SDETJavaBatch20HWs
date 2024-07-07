@@ -12,7 +12,7 @@ int age = 50;
 int iq = age;
 
         // Step 4: Print the name
-        System.out.print(name);
+        System.out.println(name);
 
         // Step 5: Print the age and iq on the same line
         System.out.print(age);

@@ -6,9 +6,9 @@ public class E6ArithmeticOperations {
         float value=8.2f;
 
         // Step 2: Multiply the value by itself and store the result
-        float result= value*=value;
+        float result= value*value;
 
         // Step 3: Print the result
-        System.out.println(result);
+        System.out.println("The multiplication of "+value+" with itself is equal to "+result);
     }
 }

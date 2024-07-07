@@ -17,7 +17,7 @@ public class E12CalculateCostArithmeticConcat {
         // Print the results
       //  System.out.println("The total cost is " + totalCost);
         //System.out.println("The average cost is " + averageCost);
-        System.out.println("The total cost is " + totalCost);
-        System.out.println("The average cost is " + averageCost);
+        System.out.println("The total cost is " + String.format("%.2f", totalCost));
+        System.out.println("The average cost is " + String.format("%.3f", averageCost));
     }
 }
