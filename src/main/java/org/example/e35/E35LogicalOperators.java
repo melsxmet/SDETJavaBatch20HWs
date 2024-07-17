@@ -20,23 +20,25 @@ public class E35LogicalOperators {
         //        If credit score is between 701 and 800 inclusive, eligibility = "Eligible"
         //        If credit score is higher than 800, eligibility = "Definitely eligible"
         // If the user does not need a loan, eligibility = "Unknown"
+        String eligibility = "";
+        
         if(needsLoan.equals(true)){
             System.out.println("What is your credit score?");
             int creditScore=input.nextInt();
-
+            
             if(creditScore<600){
-                System.out.println("The eligibility is Not Eligible");
+                eligibility="Not eligible";
             }else if(creditScore<700) {
-                System.out.println("The eligibility is Maybe eligible");
+                eligibility="Maybe eligible";
             }else if(creditScore<800){
-                System.out.println("The eligibility is Eligible");
+                eligibility="Eligible";
             }else if(creditScore>800){
-                System.out.println("The eligibility is Definitely eligible");
+                eligibility="Definitely eligible";
             }
         }else{
-            System.out.println("The eligibility is Unknown");
+            eligibility="Unknown";
         }
         // Print the eligibility status
-
+        System.out.println("The eligibility is "+eligibility);
     }
 }
