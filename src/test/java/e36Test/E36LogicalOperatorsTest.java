@@ -1,69 +1,82 @@
 package e36Test;
 
 import org.example.e36.E36LogicalOperators;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class E36LogicalOperatorsTest {
-    private InputStream originalSystemIn;
-    private ByteArrayInputStream inputStream;
-    private PrintStream originalSystemOut;
-    private ByteArrayOutputStream outputStream;
+class E36LogicalOperatorsTest {
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final InputStream originalIn = System.in;
 
-
-    public void setUpInput() {
-        originalSystemIn = System.in;
-        originalSystemOut = System.out;
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
+    @BeforeEach
+    void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
     }
 
-
-    public void restoreSystemIn() {
-        System.setIn(originalSystemIn);
-        System.setOut(originalSystemOut);
+    @AfterEach
+    void restoreStreams() {
+        System.setOut(originalOut);
+        System.setIn(originalIn);
     }
 
     @Test
-    public void testAndCondition() {
-        setUpInput();
-        setSystemIn("hello\nhello\n5\n5\n");
-        E36LogicalOperators.main(new String[0]);
-        assertEquals("AND", outputStream.toString().trim());
-        restoreSystemIn();
+    void testPrioritizingEssentialsWell() {
+        String simulatedInput = "1200\n600\n300\n200\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        E36LogicalOperators.main(new String[]{});
+        String expectedOutput = "Please enter your monthly rent expense" + System.lineSeparator() +
+                "Please enter your monthly food expense" + System.lineSeparator() +
+                "Please enter your monthly transportation expense" + System.lineSeparator() +
+                "Please enter your monthly entertainment expense" + System.lineSeparator() +
+                "You are prioritizing essentials well." + System.lineSeparator();
+
+        String failureMessage = "The output does not match the expected values when prioritizing essentials well.";
+
+        assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
 
     @Test
-    public void testOrCondition() {
-        setUpInput();
-        setSystemIn("hello\nworld\n5\n5\n");
-        E36LogicalOperators.main(new String[0]);
-        assertEquals("OR", outputStream.toString().trim());
-        restoreSystemIn();
+    void testOnTheRightTrack() {
+        String simulatedInput = "1200\n800\n300\n400\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        E36LogicalOperators.main(new String[]{});
+        String expectedOutput = "Please enter your monthly rent expense" + System.lineSeparator() +
+                "Please enter your monthly food expense" + System.lineSeparator() +
+                "Please enter your monthly transportation expense" + System.lineSeparator() +
+                "Please enter your monthly entertainment expense" + System.lineSeparator() +
+                "You are on the right track, but could improve." + System.lineSeparator();
+
+        String failureMessage = "The output does not match the expected values when on the right track.";
+
+        assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
 
     @Test
-    public void testNoneCondition() {
-        setUpInput();
-        setSystemIn("hello\nworld\n5\n10\n");
-        E36LogicalOperators.main(new String[0]);
-        assertEquals("NONE", outputStream.toString().trim());
-        restoreSystemIn();
+    void testNeedToRethinkSpendingPriorities() {
+        String simulatedInput = "1000\n1200\n200\n300\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        E36LogicalOperators.main(new String[]{});
+        String expectedOutput = "Please enter your monthly rent expense" + System.lineSeparator() +
+                "Please enter your monthly food expense" + System.lineSeparator() +
+                "Please enter your monthly transportation expense" + System.lineSeparator() +
+                "Please enter your monthly entertainment expense" + System.lineSeparator() +
+                "You need to rethink your spending priorities." + System.lineSeparator();
+
+        String failureMessage = "The output does not match the expected values when needing to rethink spending priorities.";
+
+        assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
-
-    private void setSystemIn(String input) {
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-    }
-
-    /*private String getOutput() {
-
-        return outputStream.toString();
-    }*/
 }
