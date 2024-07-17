@@ -1,17 +1,29 @@
 package org.example.e40;
 
+import java.util.Scanner;
+
 public class E40SwitchClass {
     public static void main(String[] args) {
-        // Create a Scanner object to read input
 
-        // Print prompt for user to enter the name of the instructor
-        // Capture the instructor name input
+        Scanner input=new Scanner(System.in);
 
-        // Determine the responsibility based on the instructor's name using a switch statement
+        System.out.println("Enter name of the instructor");
+        String instructorName=input.next();
 
+        String responsibility;
+        if (instructorName.equals("Asghar")){
+            responsibility="Will take care of Java Assignment";
+        }else if(instructorName.equals("Moazzam")){
+            responsibility="Will take care of SDLC Assignment";
+        }else if(instructorName.equals("Weqas")){
+            responsibility="Will take care of Selenium Assignment";
+        }else if(instructorName.equals("Asel")){
+            responsibility="Will take care of every Assignment";
+        }else{
+            responsibility="Invalid instructor selected";
+        }
 
-        // Print the responsibility
-
+        System.out.println(responsibility);
 
     }
 }
