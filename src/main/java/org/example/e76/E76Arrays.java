@@ -10,7 +10,17 @@ public class E76Arrays {
         };
 
         // Use nested loops to iterate through the 2D array and double the value of each element
-
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                a[i][j] *= 2;
+            }
+        }
         // Use nested loops to iterate through the 2D array and print each value
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                System.out.print(a[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
