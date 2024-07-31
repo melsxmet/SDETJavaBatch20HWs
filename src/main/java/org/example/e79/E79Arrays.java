@@ -11,11 +11,19 @@ public class E79Arrays {
         };
 
         // Declare an array to store the sums of each row
-
+        int[] rowSums=new int[a.length];
         // Use nested loops to iterate through the 2D array and calculate the sum of each row
-
+        for(int i=0;i<a.length;i++){
+            int sum=0;
+            for(int j=0;j<a[i].length;j++){
+                sum+=a[i][j];
+            }
+            rowSums[i]=sum;
+            System.out.println(rowSums[i]);
+        }
         // Store the sums in the new array
 
         // Print the values of the new array
+
     }
 }
