@@ -1,7 +1,6 @@
-package e28test;
+package e73arraystest;
 
-
-import org.example.e28.E28SimpleCalculatorElseIf;
+import org.example.e73.E73Arrays;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,9 +11,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class E28SimpleCalculatorElseIfTest {
+class E73ArraysTester {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -32,17 +30,19 @@ class E28SimpleCalculatorElseIfTest {
     }
 
     @Test
-    void testProduct() {
-
-        // Simulate the program with an operator that should result in "The product is: 50"
-        String simulatedInput = "*\n5\n10\n";
+    void testArrayValues() {
+        String simulatedInput = "1\n2\n3\n4\n5\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
-        E28SimpleCalculatorElseIf.main(new String[]{});
-        String expectedOutput = "The product is: 50.0" + System.lineSeparator();
+        E73Arrays.main(new String[]{});
+        String expectedOutput = "5" + System.lineSeparator() +
+                                "4" + System.lineSeparator() +
+                                "3" + System.lineSeparator() +
+                                "2" + System.lineSeparator() +
+                                "1" + System.lineSeparator();
 
-        String failureMessage = "The output does not match the expected values.\n" +
-                "Please ensure that your program performs the correct arithmetic operation based on the operator.";
+        String failureMessage = "The output does not match the expected values for the array.\n" +
+                "Please ensure that your program correctly reads the input, stores the values, and prints them in reverse order.";
 
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }

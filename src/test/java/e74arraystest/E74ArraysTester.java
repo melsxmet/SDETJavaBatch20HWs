@@ -1,7 +1,6 @@
-package e28test;
+package e74arraystest;
 
-
-import org.example.e28.E28SimpleCalculatorElseIf;
+import org.example.e74.E74Arrays;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,9 +11,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class E28SimpleCalculatorElseIfTest {
+class E74ArraysTester {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -32,17 +30,19 @@ class E28SimpleCalculatorElseIfTest {
     }
 
     @Test
-    void testProduct() {
-
-        // Simulate the program with an operator that should result in "The product is: 50"
-        String simulatedInput = "*\n5\n10\n";
+    void testArrayValues() {
+        String simulatedInput = "1\n2\n3\n4\n5\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
-        E28SimpleCalculatorElseIf.main(new String[]{});
-        String expectedOutput = "The product is: 50.0" + System.lineSeparator();
+        E74Arrays.main(new String[]{});
+        String expectedOutput = "10" + System.lineSeparator() +
+                                "20" + System.lineSeparator() +
+                                "30" + System.lineSeparator() +
+                                "40" + System.lineSeparator() +
+                                "50" + System.lineSeparator();
 
-        String failureMessage = "The output does not match the expected values.\n" +
-                "Please ensure that your program performs the correct arithmetic operation based on the operator.";
+        String failureMessage = "The output does not match the expected values for the array.\n" +
+                "Please ensure that your program correctly reads the input, stores the values, multiplies them by 10, and prints the result.";
 
         assertEquals(expectedOutput, outContent.toString(), failureMessage);
     }
